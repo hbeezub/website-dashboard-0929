@@ -1,0 +1,66 @@
+---
+title: "Babe Ruthe Stattistics"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+Inputs {.sidebar}
+-------------------------------------
+George Herman "Babe" Ruth Jr. was a professional baseball player whose career in Major League Baseball spanned 22 seasons, from 1914 through 1935.
+He played for the Boston Red Sox (1914-1919), New York Yankees (1920-1934), and Atlanta Braves (1935). 
+He was a power hitter for New York Yankies in 20's & 30's.  Babe held the recod for most HR in a season in 1919 with the Boston Red Sox, he broke his own record 3 times.  
+In 1927 he hit 60 Homeruns in one season.  This record held until Roger Maris of the NYY broke it in 1961.  
+
+In addition, he also held the career homerun record.  When he was 22, he displaced Roger Connor's 138 home runs record by hitting 167 home runs during the 1921 season.  He added to his total each yer, ending his 1935 season with 714 home runs.  This record wasn't broken until 1974 by Hank Aaron.  
+
+As a side note, I was nine & remember this being being news, watching a replay of hit number 715 on the nightly news.  That spring, all the boys at school talked about was baseball & "when" he would break the record.
+
+
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(Lahman)
+library(dplyr)
+library(ggplot2)
+library(ggiraph)
+result<-Batting%>%
+          filter(playerID=='ruthba01')%>%
+          select(yearID,SO,HR)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Strikeous vs Home Runs(scatter plot graph)
+
+```{r}
+ggplot()+
+  geom_point(data=result,aes(x=SO,y=HR))+
+  xlab('strikeouts')+
+  ylab('Homeruns')
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Homerun distribution (histogram plot)
+
+```{r}
+
+ggplot()+
+  geom_histogram(data=result,aes(x=HR),bins=5,color="blue",fill="white")
+
+```
+
+### Homerun totals each year (line plot)
+
+```{r}
+ggplot()+
+  geom_point(data=result,aes(x=yearID,y=HR))+
+  geom_line(data=result,aes(x=yearID,y=HR))+
+  xlab('year')+
+  ylab('homeruns')
+```
+
