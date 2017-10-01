@@ -42,6 +42,10 @@ ggplot()+
 
 ```
 
+### Picture from Web
+
+<img src="pic-Babe-Ruth-Getty-Image.jpg" width="300"/>
+
 Column {data-width=350}
 -----------------------------------------------------------------------
 
